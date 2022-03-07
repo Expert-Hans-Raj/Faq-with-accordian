@@ -1,0 +1,86 @@
+<!--    Product-Details      -->
+        <div class="accordion-container">
+          <h3>FAQs</h3>
+          {% for block in section.blocks %}
+            <div class="set">
+              <span>
+                {%if block.settings.question != blank %}
+               {{ block.settings.question }} 
+                <i class="fa fa-plus"></i>
+                {% endif %}
+              </span>
+               {%if block.settings.ans != blank %}
+              <div class="content"> {{ block.settings.ans }} </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+ <!--    Product-Details      -->
+
+{% schema %}
+  {
+    "name": "Faq",
+    "settings": [],
+"blocks":[{
+"name":"faq",
+"type":"faq",
+"settings":[
+{
+"type":"text",
+"id":"question",
+"label":"Add Question",
+"default":"Use services data to identify your most common questions."
+},
+{
+"type":"text",
+"id":"ans",
+"label":"Add Question Answer",
+"default":"Your Faq page should address the most common questions customers have aboput your products,services,and brand as a whole."
+}
+]
+}
+],
+"presets":[
+{
+"name":"Faq",
+"category":"Faq"
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<script>
+$(document).ready(function() {
+  $(".set > span").on("click", function() {
+    if ($(this).hasClass("active")) {
+      $(this).removeClass("active");
+      $(this)
+        .siblings(".content")
+        .slideUp(0);
+      $(".set > span i")
+        .removeClass("fa-minus")
+        .addClass("fa-plus");
+    } else {
+      $(".set > span i")
+        .removeClass("fa-minus")
+        .addClass("fa-plus");
+      $(this)
+        .find("i")
+        .removeClass("fa-plus")
+        .addClass("fa-minus");
+      $(".set > span").removeClass("active");
+      $(this).addClass("active");
+      $(".content").slideUp(0);
+      $(this)
+        .siblings(".content")
+        .slideDown(0);
+    }
+  });
+});
+
+</script>
